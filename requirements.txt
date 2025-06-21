@@ -1,0 +1,7 @@
+selenium
+requests
+fake-useragent
+numpy
+beautifulsoup4
+lxml
+pip-system-certs
