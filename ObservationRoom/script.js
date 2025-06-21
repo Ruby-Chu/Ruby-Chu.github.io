@@ -33,7 +33,7 @@ window.Apex = {
     theme: "dark",
     x: {
       formatter: function (val) {
-        return moment(new Date(val)).format("HH:mm:ss");
+        return moment(new Date(val)).format("YYYY/MM/DD");
       },
     },
   },
