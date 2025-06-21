@@ -43,6 +43,7 @@ fid2.close()
 
 fid3 = open("index_temp.html", "r",encoding="utf-8")
 s1 = fid3.read()
+s1 = s1.replace('{today}',str(labels[0]))
 s1 = s1.replace('{today_military}',str(military[0]))
 s1 = s1.replace('{today_warship}',str(warship[0]))
 s1 = s1.replace('{today_balloon}',str(balloon[0]))
