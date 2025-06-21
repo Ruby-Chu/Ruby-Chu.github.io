@@ -1,5 +1,5 @@
 import sqlite3
-
+from datetime import datetime
 con = sqlite3.connect("mydb.db")
 cur = con.cursor()
 
@@ -48,6 +48,8 @@ s1 = s1.replace('{today_military}',str(military[0]))
 s1 = s1.replace('{today_warship}',str(warship[0]))
 s1 = s1.replace('{today_balloon}',str(balloon[0]))
 s1 = s1.replace('{today_missile}',str(missile[0]))
+d1 = datetime.today().strftime('%Y%m%d')
+s1 = s1.replace('{version}',d1)
 fid3.close()
 fid4 = open("ObservationRoom/index.html", "w",encoding="utf-8")
 fid4.write(s1)
