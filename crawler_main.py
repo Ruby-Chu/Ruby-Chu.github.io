@@ -69,7 +69,7 @@ if __name__ == "__main__":
                     # 逾越海峽中線1架次
                     enter_warn_pattern2 = re.findall(r'逾越海峽中線(\d+)架次', text)
                     preview_missile_pattern = re.search(r'預於(\d{1,2})月(\d{1,2})日', text)
-                    if "臺海周邊海、空域活動_(另開新視窗)" in text:
+                    if "臺海周邊海、空域活動_" in text:
                         missile_total = 1
                     elif "臺海周邊海、空域活動2" in text:
                         missile_total = 1
