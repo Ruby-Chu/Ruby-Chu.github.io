@@ -60,7 +60,7 @@ if __name__ == "__main__":
     s1 = s1.replace('{today_warship}',str(warship[0]))
     s1 = s1.replace('{today_balloon}',str(balloon[0]))
     s1 = s1.replace('{today_missile}',str(missile[0]))
-    d1 = datetime.today().strftime('%Y%m%d')
+    d1 = datetime.today().strftime('%Y%m%d%H%M%S')
     s1 = s1.replace('{version}',d1)
     
         
