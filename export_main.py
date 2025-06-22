@@ -52,6 +52,6 @@ if __name__ == "__main__":
     d1 = datetime.today().strftime('%Y%m%d')
     s1 = s1.replace('{version}',d1)
     fid3.close()
-    fid4 = open("ObservationRoom/index.html", "w",encoding="utf-8")
+    fid4 =  open("ObservationRoom/index.html", "w",encoding="utf-8")
     fid4.write(s1)
     fid4.close()
