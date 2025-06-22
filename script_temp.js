@@ -165,6 +165,60 @@ var chartColumn = new ApexCharts(
 );
 chartColumn.render();
 
+var optionsCircle = {
+  chart: {
+    type: "radialBar",
+    height: 250,
+    offsetX: 0
+  },
+  plotOptions: {
+    radialBar: {
+      inverseOrder: false,
+      hollow: {
+        margin: 5,
+        size: "48%",
+        background: "transparent"
+      },
+      track: {
+        show: true,
+        background: "#40475D",
+        strokeWidth: "10%",
+        opacity: 1,
+        margin: 3 // margin is in pixels
+      }
+    }
+  },
+  series: [{today_military_p}, {today_military_wp}],
+  labels: ["本日/本日共機百分比", "本日/本日逾越百本比"],
+  legend: {
+    show: true,
+    position: "left",
+    offsetX: -30,
+    offsetY: -10,
+    formatter: function (val, opts) {
+      return val + " - " + opts.w.globals.series[opts.seriesIndex] + "%";
+    }
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "light",
+      type: "horizontal",
+      shadeIntensity: 0.5,
+      inverseColors: true,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 100]
+    }
+  }
+};
+
+var chartCircle = new ApexCharts(
+  document.querySelector("#circlechart"),
+  optionsCircle
+);
+chartCircle.render();
+
 $(".counter").each(function () {
   var $this = $(this),
     countTo = $this.attr("data-count");

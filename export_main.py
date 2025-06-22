@@ -12,6 +12,7 @@ if __name__ == "__main__":
     offical_ship = []
     balloon = []
     missile = []
+    enter_warn = []
     for row in rows:
         labels.append(row[1])
         military.append(row[4])
@@ -19,6 +20,7 @@ if __name__ == "__main__":
         offical_ship.append(row[6])
         balloon.append(row[7])
         missile.append(row[8])
+        enter_warn.append(row[9])
 
     con.close()
 
@@ -37,6 +39,15 @@ if __name__ == "__main__":
     s = s.replace('{balloon_temp}',"[" + str_balloon +"]")
     # str_missile = ', '.join(str(v) for v in missile)
     # s = s.replace('{missile_temp}',"[" + str_missile +"]")
+    # 統計
+    if military[0] == 0:
+        today_military_p = 0
+        today_military_wp = 0
+    else:
+        today_military_p = round((military[0]/ military[0])*100,1)
+        today_military_wp = round((enter_warn[0]/military[0])*100,1)
+    s = s.replace('{today_military_p}', str(today_military_p))
+    s = s.replace('{today_military_wp}', str(today_military_wp))
     fid.close()
     fid2 = open("ObservationRoom/msg.js", "w",encoding="utf-8")
     fid2.write(s)
@@ -51,6 +62,11 @@ if __name__ == "__main__":
     s1 = s1.replace('{today_missile}',str(missile[0]))
     d1 = datetime.today().strftime('%Y%m%d')
     s1 = s1.replace('{version}',d1)
+    
+        
+
+
+
     fid3.close()
     fid4 =  open("ObservationRoom/index.html", "w",encoding="utf-8")
     fid4.write(s1)
