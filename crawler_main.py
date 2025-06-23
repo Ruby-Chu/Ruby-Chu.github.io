@@ -36,7 +36,7 @@ if __name__ == "__main__":
     );"""
     cursor.execute(table)
     try:
-        for i in range(1, 15):
+        for i in range(1, 2):
             print("page:{}".format(i))
             for index in range(0, 10):
                 url = temp_url.format(i)
@@ -133,8 +133,8 @@ if __name__ == "__main__":
                     cursor.execute(statement)
                     output = cursor.fetchmany(1)
                     if (len(output) == 0):
+                        print("=== commit new ===")
                         print(date_string)
-                        print("commit new")
                         print("共機{}架次\n公務船{}艘\n共艦{}艘\n氣球{}顆".format(total_aircraft, total_official_ship,
                                                                                     total_warship, total_balloon))
                         print("{}飛彈經過台灣".format(missile_total))
