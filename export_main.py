@@ -22,7 +22,6 @@ if __name__ == "__main__":
         missile.append(row[8])
         enter_warn.append(row[9])
 
-    con.close()
 
     fid = open("script_temp.js", "r",encoding="utf-8")
     # Perform operations on file_object
@@ -48,7 +47,42 @@ if __name__ == "__main__":
         today_military_wp = round((enter_warn[0]/military[0])*100,1)
     s = s.replace('{today_military_p}', str(today_military_p))
     s = s.replace('{today_military_wp}', str(today_military_wp))
+    
+    rows2 = cur.execute("select * from INFO_COUNT")
+    m_labels = []
+    m_military = []
+    m_warship = []
+    m_offical_ship = []
+    m_balloon = []
+    m_missile = []
+    m_enter_warn = []
+    m_total = []
+    for r in rows2:
+        m_labels.append(r[0])
+        m_military.append(r[3])
+        m_enter_warn.append(r[8])
+        m_warship.append(r[4])
+        m_missile.append(r[7])
+        m_total.append(r[9])
+    
+    str_m_labels = ', '.join('\''+v+'\'' for v in m_labels)
+    s = s.replace('{m_labels_temp}',"[" + str_m_labels +"]")
+    str_m_military = ', '.join(str(v) for v in m_military)
+    s = s.replace('{m_military_temp}',"[" + str_m_military +"]")
+    str_m_enter_warn = ', '.join(str(v) for v in m_enter_warn)
+    s = s.replace('{m_enter_warn_temp}',"[" + str_m_enter_warn +"]")
+    str_m_warship = ', '.join(str(v) for v in m_warship)
+    s = s.replace('{m_warship_temp}',"[" + str_m_warship +"]")
+    str_m_total = ', '.join(str(v) for v in m_total)
+    s = s.replace('{m_total_temp}',"[" + str_m_total +"]")
+    str_m_missile = ', '.join(str(v) for v in m_missile)
+    s = s.replace('{m_missile_temp}',"[" + str_m_missile +"]")
+
+    con.close()
+    
+
     fid.close()
+    
     fid2 = open("ObservationRoom/msg.js", "w",encoding="utf-8")
     fid2.write(s)
     fid2.close()
@@ -63,8 +97,7 @@ if __name__ == "__main__":
     d1 = datetime.today().strftime('%Y%m%d%H%M%S')
     s1 = s1.replace('{version}',d1)
     
-        
-
+   
 
 
     fid3.close()

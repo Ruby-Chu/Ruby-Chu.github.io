@@ -5,7 +5,7 @@ window.Apex = {
       show: false,
     },
   },
-  colors: ["#FCCF31", "#17ead9", "#f02fc2"],
+  colors: ["#fad0c4", "#007adf", "#a18cd1", "#accbee", "#96deda"],
   stroke: {
     width: 3,
   },
@@ -26,19 +26,20 @@ window.Apex = {
   fill: {
     type: "gradient",
     gradient: {
-      gradientToColors: ["#F55555", "#6078ea", "#6094ea"],
+      shade: "light",
+      shadeIntensity: 0.5,
+      gradientToColors: ["#ffd1ff", "#00ecbc", "#fbc2eb", "#e7f0fd", "#50c9c3"],
+      inverseColors: true,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 50, 100],
+      colorStops: [],
     },
   },
   tooltip: {
-    theme: "dark",
-    x: {
-      formatter: function (val) {
-        return moment(new Date(val)).format("YYYY/MM/DD");
-      },
-    },
+    theme: "light",
   },
   yaxis: {
-    decimalsInFloat: 2,
     opposite: true,
     labels: {
       offsetX: -10,
@@ -54,9 +55,6 @@ var optionsColumn = {
     animations: {
       enabled: false,
     },
-    toolbar: {
-      show: false,
-    },
     zoom: {
       enabled: true,
     },
@@ -67,26 +65,24 @@ var optionsColumn = {
   stroke: {
     width: 0,
   },
-  series: [
-    {
+  series: [{
       name: "共機",
       data: {military_temp},
-    },
-    {
+    }, {
       name: "共艦",
       data: {warship_temp},
-    },
-    {
+    }, {
       name: "氣球",
       data: {balloon_temp},
     },
+    
   ],
   title: {
     text: "共軍擾台觀察",
     align: "center",
     style: {
       fontSize: "20px",
-      color: "white",
+      color: "whitesmoke",
     },
   },
   subtitle: {
@@ -98,53 +94,30 @@ var optionsColumn = {
     offsetY: 0,
     style: {
       fontSize: "14px",
-      color: "gray",
+      color: "whitesmoke",
     },
   },
   fill: {
-    type: "gradient",
     gradient: {
-      shade: "light",
-      type: "vertical",
-      shadeIntensity: 0.5,
-      //   gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-      inverseColors: true,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 50, 100],
-      colorStops: [],
+      type: "diagonal2", // vertical, horizontal, diagonal1, diagonal2
     },
   },
   xaxis: {
-    // type: "datetime",
-    // labels: {
-    //   format: "yyyy/MM/dd",
-    // },
     labels: {
       style: {
         fontSize: "10px",
+        // fontFamily: 'cursivesystem-ui',
       },
     },
     categories: {date_temp},
   },
-  responsive: [
-    {
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: "bottom",
-          offsetX: -10,
-          offsetY: 0,
-        },
-      },
-    },
-  ],
   plotOptions: {
     bar: {
       horizontal: false,
-      borderRadius: 10,
+      borderRadius: 5,
       borderRadiusApplication: "end", // 'around', 'end'
       borderRadiusWhenStacked: "last", // 'all', 'last'
+      columnWidth: '70%',
       dataLabels: {
         total: {
           enabled: true,
@@ -189,7 +162,7 @@ var optionsCircle = {
     }
   },
   series: [{today_military_p}, {today_military_wp}],
-  labels: ["本日/本日共機百分比", "本日/本日逾越百本比"],
+  labels: ["共機百分比", "逾越百本比"],
   legend: {
     show: true,
     position: "left",
@@ -200,15 +173,8 @@ var optionsCircle = {
     }
   },
   fill: {
-    type: "gradient",
     gradient: {
-      shade: "light",
       type: "horizontal",
-      shadeIntensity: 0.5,
-      inverseColors: true,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 100]
     }
   }
 };
@@ -218,6 +184,109 @@ var chartCircle = new ApexCharts(
   optionsCircle
 );
 chartCircle.render();
+
+var options = {
+  series: [{
+    name: '本月共機架次',
+    type: 'column',
+    data: {m_military_temp}
+  }, {
+    name: '本月共機逾越架次',
+    type: 'line',
+    data: {m_enter_warn_temp}
+  },
+  {
+    name: '本月共艦艘次',
+    type: 'column',
+    data: {m_warship_temp}
+  }, {
+    name: 'Total',
+    type: 'line',
+    data: {m_total_temp}
+  }, {
+    name: '飛彈飛越外太空',
+    type: 'line',
+    data: {m_missile_temp}
+  }],
+  chart: {
+    height: 270,
+    type: 'line',
+  },
+  stroke: {
+    width: [0, 0, 0, 4, 0]
+  },
+  title: {
+    text: '每月統計',
+    style: {
+      fontSize: "16px",
+      color: "whitesmoke",
+    },
+  },
+  dataLabels: {
+    enabled: true,
+    enabledOnSeries: [1, 3, 4]
+  },
+  labels: {m_labels_temp},
+  yaxis: [{
+    title: {
+      text: '總數量(架/艘)',
+      style: {
+        fontSize: "14px",
+        color: "whitesmoke",
+      },
+    },
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    opposite: true,
+    stepSize: 1,
+    floating: false,
+    min: 0,
+    title: {
+      text: '太空有飛彈次數',
+      style: {
+        fontSize: "14px",
+        color: "whitesmoke",
+      },
+    },
+  }],
+  fill: {
+    gradient: {
+      type: "vertical",
+    },
+  },
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      borderRadius: 5,
+      borderRadiusApplication: "end", // 'around', 'end'
+      borderRadiusWhenStacked: "last", // 'all', 'last'
+      columnWidth: '50%',
+      dataLabels: {
+        total: {
+          enabled: true,
+          style: {
+            fontSize: "12px",
+            fontWeight: 900,
+            color: "gray",
+          },
+        },
+      },
+    },
+  }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart2"), options);
+chart.render();
+
 
 $(".counter").each(function () {
   var $this = $(this),
@@ -240,5 +309,3 @@ $(".counter").each(function () {
     }
   );
 });
-
-

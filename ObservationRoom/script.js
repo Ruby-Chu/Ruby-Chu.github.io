@@ -5,7 +5,7 @@ window.Apex = {
       show: false,
     },
   },
-  colors: ["#FCCF31", "#17ead9", "#f02fc2", "#3399ff", "#cc3300"],
+  colors: ["#fad0c4", "#007adf", "#a18cd1", "#accbee", "#96deda"],
   stroke: {
     width: 3,
   },
@@ -26,7 +26,14 @@ window.Apex = {
   fill: {
     type: "gradient",
     gradient: {
-      gradientToColors: ["#F55555", "#6078ea", "#6094ea", "#e6ecff", "#ffece6"],
+      shade: "light",
+      shadeIntensity: 0.5,
+      gradientToColors: ["#ffd1ff", "#00ecbc", "#fbc2eb", "#e7f0fd", "#50c9c3"],
+      inverseColors: true,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 50, 100],
+      colorStops: [],
     },
   },
   tooltip: {
@@ -48,9 +55,6 @@ var optionsColumn = {
     animations: {
       enabled: false,
     },
-    toolbar: {
-      show: false,
-    },
     zoom: {
       enabled: true,
     },
@@ -61,26 +65,24 @@ var optionsColumn = {
   stroke: {
     width: 0,
   },
-  series: [
-    {
+  series: [{
       name: "共機",
       data: [5, 12, 40, 50, 25, 7, 17, 0, 0, 0, 15, 10, 43, 14, 7, 11, 34, 38, 24, 2],
-    },
-    {
+    }, {
       name: "共艦",
       data: [9, 6, 6, 6, 7, 6, 6, 6, 6, 8, 7, 7, 6, 6, 8, 7, 8, 7, 8, 12],
-    },
-    {
+    }, {
       name: "氣球",
       data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
+    
   ],
   title: {
     text: "共軍擾台觀察",
     align: "center",
     style: {
       fontSize: "20px",
-      color: "white",
+      color: "whitesmoke",
     },
   },
   subtitle: {
@@ -92,49 +94,32 @@ var optionsColumn = {
     offsetY: 0,
     style: {
       fontSize: "14px",
-      color: "gray",
+      color: "whitesmoke",
     },
   },
   fill: {
-    type: "gradient",
     gradient: {
-      shade: "light",
-      type: "vertical",
-      shadeIntensity: 0.5,
-      //   gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-      inverseColors: true,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 50, 100],
-      colorStops: [],
+      type: "diagonal2", // vertical, horizontal, diagonal1, diagonal2
     },
   },
   xaxis: {
     labels: {
       style: {
         fontSize: "10px",
+        // fontFamily: 'cursivesystem-ui',
       },
     },
-    categories: ['2025-06-23', '2025-06-22', '2025-06-21', '2025-06-20', '2025-06-19', '2025-06-18', '2025-06-17', '2025-06-16', '2025-06-15', '2025-06-14', '2025-06-13', '2025-06-12', '2025-06-11', '2025-06-10', '2025-06-09', '2025-06-08', '2025-06-07', '2025-06-06', '2025-06-05', '2025-06-04'],
+    categories: ['2025-06-23', '2025-06-22', '2025-06-21', '2025-06-20', '2025-06-19', '2025-06-18', '2025-06-17', '2025-06-16',
+      '2025-06-15', '2025-06-14', '2025-06-13', '2025-06-12', '2025-06-11', '2025-06-10', '2025-06-09', '2025-06-08', '2025-06-07',
+      '2025-06-06', '2025-06-05', '2025-06-04'],
   },
-  responsive: [
-    {
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: "bottom",
-          offsetX: -10,
-          offsetY: 0,
-        },
-      },
-    },
-  ],
   plotOptions: {
     bar: {
       horizontal: false,
-      borderRadius: 10,
+      borderRadius: 5,
       borderRadiusApplication: "end", // 'around', 'end'
       borderRadiusWhenStacked: "last", // 'all', 'last'
+      columnWidth: '70%',
       dataLabels: {
         total: {
           enabled: true,
@@ -190,15 +175,8 @@ var optionsCircle = {
     }
   },
   fill: {
-    type: "gradient",
     gradient: {
-      shade: "light",
       type: "horizontal",
-      shadeIntensity: 0.5,
-      inverseColors: true,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 100]
     }
   }
 };
@@ -223,11 +201,11 @@ var options = {
     name: '本月共艦艘次',
     type: 'column',
     data: [165, 250, 249, 224, 221, 191, 93]
-  },{
+  }, {
     name: 'Total',
     type: 'line',
     data: [533, 737, 761, 672, 685, 532, 223]
-  },{
+  }, {
     name: '飛彈飛越外太空',
     type: 'line',
     data: [1, 2, 1, 2, 1, 1, 1]
@@ -240,7 +218,11 @@ var options = {
     width: [0, 0, 0, 4, 0]
   },
   title: {
-    text: '每月統計'
+    text: '每月統計',
+    style: {
+      fontSize: "16px",
+      color: "whitesmoke",
+    },
   },
   dataLabels: {
     enabled: true,
@@ -249,32 +231,38 @@ var options = {
   labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12'],
   yaxis: [{
     title: {
-      text: '總數量',
-    },
-  }, {
-      show: false
-    }, { show: false }, { show: false },
-    {
-      opposite: true,
-      stepSize: 1,
-      floating: false,
-      min: 0,
-      title: {
-        text: '頭頂有飛彈次數'
+      text: '總數量(架/艘)',
+      style: {
+        fontSize: "14px",
+        color: "whitesmoke",
       },
+    },
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    show: false
+  },
+  {
+    opposite: true,
+    stepSize: 1,
+    floating: false,
+    min: 0,
+    title: {
+      text: '太空有飛彈次數',
+      style: {
+        fontSize: "14px",
+        color: "whitesmoke",
+      },
+    },
   }],
   fill: {
-    type: "gradient",
     gradient: {
-      shade: "light",
       type: "vertical",
-      shadeIntensity: 0.5,
-      //   gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
-      inverseColors: true,
-      opacityFrom: 1,
-      opacityTo: 1,
-      stops: [0, 50, 100],
-      colorStops: [],
     },
   },
   plotOptions: {
@@ -283,7 +271,7 @@ var options = {
       borderRadius: 5,
       borderRadiusApplication: "end", // 'around', 'end'
       borderRadiusWhenStacked: "last", // 'all', 'last'
-      columnWidth: '70%',
+      columnWidth: '50%',
       dataLabels: {
         total: {
           enabled: true,
@@ -323,5 +311,3 @@ $(".counter").each(function () {
     }
   );
 });
-
-

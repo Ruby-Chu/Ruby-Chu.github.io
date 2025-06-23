@@ -3,6 +3,7 @@
 
 DROP VIEW INFO_COUNT;
 ```sql
+CREATE VIEW INFO_COUNT AS
 SELECT strftime('%Y-%m', date) AS "year_month",
 strftime('%Y', date) AS "year",
 strftime('%m', date) AS "month",

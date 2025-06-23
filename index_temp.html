@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="logo.ico" type="image/x-icon"/>
+    <link rel="icon" href="logo.ico" type="image/x-icon" />
     <title>Observation Room</title>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -24,22 +24,25 @@
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <div class="box columnbox mt-4">
-                                <h1>{today}統計</h1>
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div id="circlechart"> </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="box columnbox mt-4">
                                 <div id="columnchart"> </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="box columnbox mt-4">
+                                <h5 style="color:whitesmoke;">{today}統計</h1>
+                                    <div id="circlechart"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="box columnbox mt-4">
+                                <div id="chart2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                     <div class="row">
                         <div class="float-right edit-on-codepen">
 
@@ -50,7 +53,7 @@
             </div>
         </div>
     </div>
-    <script src="msg.js?v={version}"></script>
+    <script src="script.js?v={version}"></script>
 
 </body>
 
