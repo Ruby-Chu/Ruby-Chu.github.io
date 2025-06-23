@@ -5,7 +5,7 @@ window.Apex = {
       show: false,
     },
   },
-  colors: ["#FCCF31", "#17ead9", "#f02fc2"],
+  colors: ["#FCCF31", "#17ead9", "#f02fc2", "#3399ff", "#cc3300"],
   stroke: {
     width: 3,
   },
@@ -26,19 +26,13 @@ window.Apex = {
   fill: {
     type: "gradient",
     gradient: {
-      gradientToColors: ["#F55555", "#6078ea", "#6094ea"],
+      gradientToColors: ["#F55555", "#6078ea", "#6094ea", "#e6ecff", "#ffece6"],
     },
   },
   tooltip: {
-    theme: "dark",
-    x: {
-      formatter: function (val) {
-        return moment(new Date(val)).format("YYYY/MM/DD");
-      },
-    },
+    theme: "light",
   },
   yaxis: {
-    decimalsInFloat: 2,
     opposite: true,
     labels: {
       offsetX: -10,
@@ -70,15 +64,15 @@ var optionsColumn = {
   series: [
     {
       name: "共機",
-      data: [50, 25, 7, 17, 0, 0, 0, 15, 10, 43],
+      data: [5, 12, 40, 50, 25, 7, 17, 0, 0, 0, 15, 10, 43, 14, 7, 11, 34, 38, 24, 2],
     },
     {
       name: "共艦",
-      data: [6, 7, 6, 6, 6, 6, 8, 7, 7, 6],
+      data: [9, 6, 6, 6, 7, 6, 6, 6, 6, 8, 7, 7, 6, 6, 8, 7, 8, 7, 8, 12],
     },
     {
       name: "氣球",
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
   ],
   title: {
@@ -116,27 +110,12 @@ var optionsColumn = {
     },
   },
   xaxis: {
-    // type: "datetime",
-    // labels: {
-    //   format: "yyyy/MM/dd",
-    // },
     labels: {
       style: {
         fontSize: "10px",
       },
     },
-    categories: [
-      "2025/06/20",
-      "2025/06/19",
-      "2025/06/18",
-      "2025/06/17",
-      "2025/06/16",
-      "2025/06/15",
-      "2025/06/14",
-      "2025/06/13",
-      "2025/06/12",
-      "2025/06/11",
-    ],
+    categories: ['2025-06-23', '2025-06-22', '2025-06-21', '2025-06-20', '2025-06-19', '2025-06-18', '2025-06-17', '2025-06-16', '2025-06-15', '2025-06-14', '2025-06-13', '2025-06-12', '2025-06-11', '2025-06-10', '2025-06-09', '2025-06-08', '2025-06-07', '2025-06-06', '2025-06-05', '2025-06-04'],
   },
   responsive: [
     {
@@ -176,28 +155,6 @@ var chartColumn = new ApexCharts(
 );
 chartColumn.render();
 
-$(".counter").each(function () {
-  var $this = $(this),
-    countTo = $this.attr("data-count");
-
-  $({ countNum: $this.text() }).animate(
-    {
-      countNum: countTo,
-    },
-
-    {
-      duration: 1000,
-      easing: "linear",
-      step: function () {
-        $this.text(Math.floor(this.countNum));
-      },
-      complete: function () {
-        $this.text(this.countNum);
-      },
-    }
-  );
-});
-
 var optionsCircle = {
   chart: {
     type: "radialBar",
@@ -221,8 +178,8 @@ var optionsCircle = {
       }
     }
   },
-  series: [0, 0],
-  labels: ["本日/本日共機百分比", "本日/本日逾越百本比"],
+  series: [100.0, 60.0],
+  labels: ["共機百分比", "逾越百本比"],
   legend: {
     show: true,
     position: "left",
@@ -251,5 +208,106 @@ var chartCircle = new ApexCharts(
   optionsCircle
 );
 chartCircle.render();
+
+var options = {
+  series: [{
+    name: '本月共機架次',
+    type: 'column',
+    data: [368, 487, 512, 448, 464, 341, 130]
+  }, {
+    name: '本月共機逾越架次',
+    type: 'line',
+    data: [268, 362, 337, 324, 347, 249, 65]
+  },
+  {
+    name: '本月共艦艘次',
+    type: 'column',
+    data: [165, 250, 249, 224, 221, 191, 93]
+  },{
+    name: 'Total',
+    type: 'line',
+    data: [533, 737, 761, 672, 685, 532, 223]
+  },{
+    name: '飛彈飛越外太空',
+    type: 'line',
+    data: [1, 2, 1, 2, 1, 1, 1]
+  }],
+  chart: {
+    height: 270,
+    type: 'line',
+  },
+  stroke: {
+    width: [0, 0, 0, 4, 0]
+  },
+  title: {
+    text: '每月統計'
+  },
+  dataLabels: {
+    enabled: true,
+    enabledOnSeries: [1, 3, 4]
+  },
+  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12'],
+  yaxis: [{
+    title: {
+      text: '總數量',
+    },
+  }, {
+      show: false
+    }, { show: false }, { show: false },
+    {
+      opposite: true,
+      stepSize: 1,
+      floating: false,
+      min: 0,
+      title: {
+        text: '頭頂有飛彈次數'
+      },
+  }],
+  plotOptions: {
+    bar: {
+      horizontal: false,
+      borderRadius: 5,
+      borderRadiusApplication: "end", // 'around', 'end'
+      borderRadiusWhenStacked: "last", // 'all', 'last'
+      columnWidth: '70%',
+      dataLabels: {
+        total: {
+          enabled: true,
+          style: {
+            fontSize: "12px",
+            fontWeight: 900,
+            color: "gray",
+          },
+        },
+      },
+    },
+  }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart2"), options);
+chart.render();
+
+
+$(".counter").each(function () {
+  var $this = $(this),
+    countTo = $this.attr("data-count");
+
+  $({ countNum: $this.text() }).animate(
+    {
+      countNum: countTo,
+    },
+
+    {
+      duration: 1000,
+      easing: "linear",
+      step: function () {
+        $this.text(Math.floor(this.countNum));
+      },
+      complete: function () {
+        $this.text(this.countNum);
+      },
+    }
+  );
+});
 
 

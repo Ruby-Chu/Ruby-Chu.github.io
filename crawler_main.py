@@ -36,7 +36,7 @@ if __name__ == "__main__":
     );"""
     cursor.execute(table)
     try:
-        for i in range(1, 2):
+        for i in range(15, 20):
             print("page:{}".format(i))
             for index in range(0, 10):
                 url = temp_url.format(i)
