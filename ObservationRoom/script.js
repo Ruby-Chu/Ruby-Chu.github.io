@@ -263,6 +263,20 @@ var options = {
         text: '頭頂有飛彈次數'
       },
   }],
+  fill: {
+    type: "gradient",
+    gradient: {
+      shade: "light",
+      type: "vertical",
+      shadeIntensity: 0.5,
+      //   gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+      inverseColors: true,
+      opacityFrom: 1,
+      opacityTo: 1,
+      stops: [0, 50, 100],
+      colorStops: [],
+    },
+  },
   plotOptions: {
     bar: {
       horizontal: false,
