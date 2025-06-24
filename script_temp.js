@@ -276,7 +276,7 @@ var options = {
       borderRadius: 5,
       borderRadiusApplication: "end", // 'around', 'end'
       borderRadiusWhenStacked: "last", // 'all', 'last'
-      columnWidth: '50%',
+      columnWidth: '70%',
       dataLabels: {
         total: {
           enabled: true,
