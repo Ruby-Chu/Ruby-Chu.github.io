@@ -187,16 +187,16 @@ chartCircle.render();
 
 var options = {
   series: [{
-    name: '本月共機架次',
+    name: '共機架次',
     type: 'column',
     data: {m_military_temp}
   }, {
-    name: '本月共機逾越架次',
+    name: '共機逾越架次',
     type: 'line',
     data: {m_enter_warn_temp}
   },
   {
-    name: '本月共艦艘次',
+    name: '共艦艘次',
     type: 'column',
     data: {m_warship_temp}
   }, {
@@ -204,12 +204,12 @@ var options = {
     type: 'line',
     data: {m_total_temp}
   }, {
-    name: '飛彈飛越外太空',
+    name: '飛彈飛越',
     type: 'line',
     data: {m_missile_temp}
   }],
   chart: {
-    height: 270,
+    height: 350,
     type: 'line',
   },
   stroke: {
@@ -228,6 +228,7 @@ var options = {
   },
   labels: {m_labels_temp},
   yaxis: [{
+    seriesName: "共機架次",
     title: {
       text: '總數量(架/艘)',
       style: {
@@ -237,12 +238,15 @@ var options = {
     },
   },
   {
+    seriesName: "共機架次",
     show: false
   },
   {
+    seriesName: "共機架次",
     show: false
   },
   {
+    seriesName: "共機架次",
     show: false
   },
   {
@@ -258,6 +262,9 @@ var options = {
       },
     },
   }],
+  legend: {
+    show: false
+  },
   fill: {
     gradient: {
       type: "vertical",
