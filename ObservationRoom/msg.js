@@ -187,29 +187,29 @@ chartCircle.render();
 
 var options = {
   series: [{
-    name: '本月共機架次',
+    name: '共機架次',
     type: 'column',
-    data: [380, 487, 512, 448, 464, 341, 409, 411, 0]
+    data: [380, 487, 512, 448, 464, 341, 409, 411]
   }, {
-    name: '本月共機逾越架次',
+    name: '共機逾越架次',
     type: 'line',
-    data: [278, 362, 337, 324, 347, 249, 211, 264, 0]
+    data: [278, 362, 337, 324, 347, 249, 211, 264]
   },
   {
-    name: '本月共艦艘次',
+    name: '共艦艘次',
     type: 'column',
-    data: [172, 250, 249, 224, 221, 191, 233, 180, 0]
+    data: [172, 250, 249, 224, 221, 191, 233, 180]
   }, {
     name: 'Total',
     type: 'line',
-    data: [552, 737, 761, 672, 685, 532, 642, 591, 0]
+    data: [552, 737, 761, 672, 685, 532, 642, 591]
   }, {
-    name: '飛彈飛越外太空',
+    name: '飛彈飛越',
     type: 'line',
-    data: [1, 2, 1, 2, 1, 1, 1, 1, 0]
+    data: [1, 2, 1, 2, 1, 1, 1, 1]
   }],
   chart: {
-    height: 270,
+    height: 350,
     type: 'line',
   },
   stroke: {
@@ -226,8 +226,9 @@ var options = {
     enabled: true,
     enabledOnSeries: [1, 3, 4]
   },
-  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11', '2024-10'],
+  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11'],
   yaxis: [{
+    seriesName: "共機架次",
     title: {
       text: '總數量(架/艘)',
       style: {
@@ -237,12 +238,15 @@ var options = {
     },
   },
   {
+    seriesName: "共機架次",
     show: false
   },
   {
+    seriesName: "共機架次",
     show: false
   },
   {
+    seriesName: "共機架次",
     show: false
   },
   {
@@ -258,6 +262,9 @@ var options = {
       },
     },
   }],
+  legend: {
+    show: false
+  },
   fill: {
     gradient: {
       type: "vertical",
