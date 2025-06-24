@@ -189,24 +189,24 @@ var options = {
   series: [{
     name: '共機架次',
     type: 'column',
-    data: [380, 487, 512, 448, 464, 341, 409, 411]
+    data: [380, 487, 512, 448, 464, 341, 409, 411, 547]
   }, {
     name: '共機逾越架次',
     type: 'line',
-    data: [278, 362, 337, 324, 347, 249, 211, 264]
+    data: [278, 362, 337, 324, 347, 249, 211, 264, 384]
   },
   {
     name: '共艦艘次',
     type: 'column',
-    data: [172, 250, 249, 224, 221, 191, 233, 180]
+    data: [172, 250, 249, 224, 221, 191, 233, 180, 182]
   }, {
     name: 'Total',
     type: 'line',
-    data: [552, 737, 761, 672, 685, 532, 642, 591]
+    data: [552, 737, 761, 672, 685, 532, 642, 591, 729]
   }, {
     name: '飛彈飛越',
     type: 'line',
-    data: [1, 2, 1, 2, 1, 1, 1, 1]
+    data: [1, 2, 1, 2, 1, 1, 1, 1, 1]
   }],
   chart: {
     height: 350,
@@ -226,7 +226,7 @@ var options = {
     enabled: true,
     enabledOnSeries: [1, 3, 4]
   },
-  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11'],
+  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11', '2024-10'],
   yaxis: [{
     seriesName: "共機架次",
     title: {
@@ -276,7 +276,7 @@ var options = {
       borderRadius: 5,
       borderRadiusApplication: "end", // 'around', 'end'
       borderRadiusWhenStacked: "last", // 'all', 'last'
-      columnWidth: '50%',
+      columnWidth: '70%',
       dataLabels: {
         total: {
           enabled: true,
