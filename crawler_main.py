@@ -36,7 +36,7 @@ if __name__ == "__main__":
     );"""
     cursor.execute(table)
     try:
-        for i in range(15, 20):
+        for i in range(19, 26):
             print("page:{}".format(i))
             for index in range(0, 10):
                 url = temp_url.format(i)
@@ -141,14 +141,15 @@ if __name__ == "__main__":
                         cursor.execute(msg)
                         conn.commit()
                     else:
-                        if output[0][2] != link:
-                            print("update ", date_string)
-                            # 更新
-                            msg2 = "UPDATE INFO SET url = \'{}\', content = \'{}\' WHERE date=\'{}\';".format(
-                                link, text, date_string
-                            )
-                            cursor.execute(msg2)
-                            conn.commit()
+                        print("pass: ", date_string)
+                    #     if output[0][2] != link:
+                    #         print("update ", date_string)
+                    #         # 更新
+                    #         msg2 = "UPDATE INFO SET url = \'{}\', content = \'{}\' WHERE date=\'{}\';".format(
+                    #             link, text, date_string
+                    #         )
+                    #         cursor.execute(msg2)
+                    #         conn.commit()
 
                     
                 print("\n=================================\n")

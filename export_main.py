@@ -58,6 +58,7 @@ if __name__ == "__main__":
     m_enter_warn = []
     m_total = []
     for r in rows2:
+        print(r)
         m_labels.append(r[0])
         m_military.append(r[3])
         m_enter_warn.append(r[8])
