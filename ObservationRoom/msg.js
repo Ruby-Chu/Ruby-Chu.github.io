@@ -1,5 +1,17 @@
 window.Apex = {
   chart: {
+    animations: {
+        enabled: true,
+        speed: 800,
+        animateGradually: {
+            enabled: true,
+            delay: 150
+        },
+        dynamicAnimation: {
+            enabled: true,
+            speed: 350
+        }
+    },
     foreColor: "#fff",
     toolbar: {
       show: false,
@@ -52,9 +64,6 @@ var optionsColumn = {
     height: 350,
     type: "bar",
     stacked: true,
-    animations: {
-      enabled: false,
-    },
     zoom: {
       enabled: true,
     },
@@ -189,27 +198,27 @@ var options = {
   series: [{
     name: '共機架次',
     type: 'column',
-    data: [380, 487, 512, 448, 464, 341, 409, 411, 547]
+    data: [380, 487, 512, 448, 464, 341]
   }, {
     name: '共機逾越架次',
     type: 'line',
-    data: [278, 362, 337, 324, 347, 249, 211, 264, 384]
+    data: [278, 362, 337, 324, 347, 249]
   },
   {
     name: '共艦艘次',
     type: 'column',
-    data: [172, 250, 249, 224, 221, 191, 233, 180, 182]
+    data: [172, 250, 249, 224, 221, 191]
   }, {
     name: 'Total',
     type: 'line',
-    data: [552, 737, 761, 672, 685, 532, 642, 591, 729]
+    data: [552, 737, 761, 672, 685, 532]
   }, {
     name: '飛彈飛越',
     type: 'line',
-    data: [1, 2, 1, 2, 1, 1, 1, 1, 1]
+    data: [1, 2, 1, 2, 1, 1]
   }],
   chart: {
-    height: 350,
+    height: 370,
     type: 'line',
   },
   stroke: {
@@ -226,14 +235,14 @@ var options = {
     enabled: true,
     enabledOnSeries: [1, 3, 4]
   },
-  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11', '2024-10'],
+  labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01'],
   yaxis: [{
     seriesName: "共機架次",
     title: {
       text: '總數量(架/艘)',
       style: {
         fontSize: "14px",
-        color: "whitesmoke",
+        color: "white",
       },
     },
   },

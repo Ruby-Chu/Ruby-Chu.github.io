@@ -1,5 +1,17 @@
 window.Apex = {
   chart: {
+    animations: {
+        enabled: true,
+        speed: 800,
+        animateGradually: {
+            enabled: true,
+            delay: 150
+        },
+        dynamicAnimation: {
+            enabled: true,
+            speed: 350
+        }
+    },
     foreColor: "#fff",
     toolbar: {
       show: false,
@@ -52,9 +64,6 @@ var optionsColumn = {
     height: 350,
     type: "bar",
     stacked: true,
-    animations: {
-      enabled: false,
-    },
     zoom: {
       enabled: true,
     },
@@ -109,7 +118,7 @@ var optionsColumn = {
         // fontFamily: 'cursivesystem-ui',
       },
     },
-    categories: {date_temp},
+    categories: ['2025-06-24', '2025-06-23', '2025-06-22', '2025-06-21', '2025-06-20', '2025-06-19', '2025-06-18', '2025-06-17', '2025-06-16', '2025-06-15', '2025-06-14', '2025-06-13', '2025-06-12', '2025-06-11', '2025-06-10', '2025-06-09', '2025-06-08', '2025-06-07', '2025-06-06', '2025-06-05'],
   },
   plotOptions: {
     bar: {
@@ -209,7 +218,7 @@ var options = {
     data: {m_missile_temp}
   }],
   chart: {
-    height: 350,
+    height: 370,
     type: 'line',
   },
   stroke: {
@@ -233,7 +242,7 @@ var options = {
       text: '總數量(架/艘)',
       style: {
         fontSize: "14px",
-        color: "whitesmoke",
+        color: "white",
       },
     },
   },

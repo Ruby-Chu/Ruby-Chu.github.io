@@ -1,5 +1,17 @@
 window.Apex = {
   chart: {
+    animations: {
+        enabled: true,
+        speed: 800,
+        animateGradually: {
+            enabled: true,
+            delay: 150
+        },
+        dynamicAnimation: {
+            enabled: true,
+            speed: 350
+        }
+    },
     foreColor: "#fff",
     toolbar: {
       show: false,
@@ -52,9 +64,6 @@ var optionsColumn = {
     height: 350,
     type: "bar",
     stacked: true,
-    animations: {
-      enabled: false,
-    },
     zoom: {
       enabled: true,
     },
@@ -187,29 +196,29 @@ chartCircle.render();
 
 var options = {
   series: [{
-    name: '本月共機架次',
+    name: '共機架次',
     type: 'column',
-    data: [380, 487, 512, 448, 464, 341, 409, 411, 0]
+    data: [380, 487, 512, 448, 464, 341, 409, 411, 547]
   }, {
-    name: '本月共機逾越架次',
+    name: '共機逾越架次',
     type: 'line',
-    data: [278, 362, 337, 324, 347, 249, 211, 264, 0]
+    data: [278, 362, 337, 324, 347, 249, 211, 264, 384]
   },
   {
-    name: '本月共艦艘次',
+    name: '共艦艘次',
     type: 'column',
-    data: [172, 250, 249, 224, 221, 191, 233, 180, 0]
+    data: [172, 250, 249, 224, 221, 191, 233, 180, 182]
   }, {
     name: 'Total',
     type: 'line',
-    data: [552, 737, 761, 672, 685, 532, 642, 591, 0]
+    data: [552, 737, 761, 672, 685, 532, 642, 591, 729]
   }, {
-    name: '飛彈飛越外太空',
+    name: '飛彈飛越',
     type: 'line',
-    data: [1, 2, 1, 2, 1, 1, 1, 1, 0]
+    data: [1, 2, 1, 2, 1, 1, 1, 1, 1]
   }],
   chart: {
-    height: 270,
+    height: 350,
     type: 'line',
   },
   stroke: {
@@ -228,29 +237,28 @@ var options = {
   },
   labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01', '2024-12', '2024-11', '2024-10'],
   yaxis: [{
-    seriesName: '本月共機架次',
+    seriesName: "共機架次",
     title: {
       text: '總數量(架/艘)',
       style: {
         fontSize: "14px",
-        color: "whitesmoke",
+        color: "white",
       },
     },
   },
   {
-    seriesName: '本月共機架次',
+    seriesName: "共機架次",
     show: false
   },
   {
-    seriesName: '本月共機架次',
+    seriesName: "共機架次",
     show: false
   },
   {
-    seriesName: '本月共機架次',
+    seriesName: "共機架次",
     show: false
   },
   {
-    seriesName: '飛彈飛越外太空',
     opposite: true,
     stepSize: 1,
     floating: false,
@@ -263,6 +271,9 @@ var options = {
       },
     },
   }],
+  legend: {
+    show: false
+  },
   fill: {
     gradient: {
       type: "vertical",
@@ -274,7 +285,7 @@ var options = {
       borderRadius: 5,
       borderRadiusApplication: "end", // 'around', 'end'
       borderRadiusWhenStacked: "last", // 'all', 'last'
-      columnWidth: '50%',
+      columnWidth: '70%',
       dataLabels: {
         total: {
           enabled: true,

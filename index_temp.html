@@ -11,6 +11,7 @@
     <link rel=stylesheet type="text/css"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
     <link rel=stylesheet type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel=stylesheet type="text/css" href="style.css?v={version}">
 </head>
 
@@ -23,12 +24,27 @@
                 <div class="main">
                     <div class="row mt-4">
                         <div class="col-md-5">
-                            <div class="box columnbox mt-4">
-                                <h5 style="color:whitesmoke;">{today}統計</h1>
-                                    <div id="circlechart"></div>
+                            <div class="row">                            
+                                <div class="col-md-12">
+                                    <div class="box columnbox mt-4">
+                                        <i class="fa fa-circle text-{result}-glow blink"></i>
+                                        <span color="white">&nbsp;&nbsp;&nbsp;&nbsp;{warn_msg}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="box columnbox mt-4">
+                                        <h5 style="color:whitesmoke;">{today}統計</h1>
+                                            <div id="circlechart"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-7">
+                            <div class="box columnbox mt-4">
+                                <div id="chart2"> </div>
+                            </div>
+                        </div>
+                        </div>
 
                     <div class="row">
                         <div class="col-md-12">
@@ -37,17 +53,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="box columnbox mt-4">
-                                <div id="chart2"></div>
-                            </div>
-                        </div>
-                    </div>
 
 
-
-                    
                     <div class="row">
                         <div class="float-right edit-on-codepen">
 

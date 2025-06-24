@@ -22,10 +22,9 @@ if __name__ == "__main__":
         missile.append(row[8])
         enter_warn.append(row[9])
 
-
     fid = open("script_temp.js", "r",encoding="utf-8")
     # Perform operations on file_object
-    s = fid.read()
+    s = fid.read()   
     str_labels = ', '.join('\''+v+'\'' for v in labels)
     s = s.replace('{date_temp}',"[" + str_labels +"]")
     str_military = ', '.join(str(v) for v in military)
@@ -48,7 +47,7 @@ if __name__ == "__main__":
     s = s.replace('{today_military_p}', str(today_military_p))
     s = s.replace('{today_military_wp}', str(today_military_wp))
     
-    rows2 = cur.execute("select * from INFO_COUNT limit 9")
+    rows2 = cur.execute("select * from INFO_COUNT limit 6")
     m_labels = []
     m_military = []
     m_warship = []
@@ -95,6 +94,9 @@ if __name__ == "__main__":
     s1 = s1.replace('{today_warship}',str(warship[0]))
     s1 = s1.replace('{today_balloon}',str(balloon[0]))
     s1 = s1.replace('{today_missile}',str(missile[0]))
+
+    s1 = s1.replace('{result}', "success")
+    s1 = s1.replace('{warn_msg}', "無飛彈飛越警告")
     d1 = datetime.today().strftime('%Y%m%d%H%M%S')
     s1 = s1.replace('{version}',d1)
     
