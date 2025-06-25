@@ -57,7 +57,6 @@ if __name__ == "__main__":
     m_enter_warn = []
     m_total = []
     for r in rows2:
-        print(r)
         m_labels.append(r[0])
         m_military.append(r[3])
         m_enter_warn.append(r[8])
@@ -78,12 +77,12 @@ if __name__ == "__main__":
     str_m_missile = ', '.join(str(v) for v in m_missile)
     s = s.replace('{m_missile_temp}',"[" + str_m_missile +"]")
 
-    con.close()
+    
     
 
     fid.close()
     
-    fid2 = open("ObservationRoom/msg.js", "w",encoding="utf-8")
+    fid2 = open("ObservationRoom/msg.js", "w", encoding="utf-8")
     fid2.write(s)
     fid2.close()
 
@@ -95,13 +94,27 @@ if __name__ == "__main__":
     s1 = s1.replace('{today_balloon}',str(balloon[0]))
     s1 = s1.replace('{today_missile}',str(missile[0]))
 
-    s1 = s1.replace('{result}', "success")
-    s1 = s1.replace('{warn_msg}', "無飛彈飛越警告")
+
+    # SELECT * FROM INFO WHERE preview_missile <> " " ORDER BY date DESC limit 1
+    rows3 = cur.execute("SELECT date, preview_missile FROM INFO WHERE preview_missile <> \" \" ORDER BY date DESC limit 1")
+    for r in rows3:
+        dt1 = datetime.now().date()
+        date_string = str(dt1.year) + "-" + r[1]
+        format_string = "%Y-%m-%d"
+        dt2 = datetime.strptime(date_string, format_string).date()
+        if (dt1 > dt2):
+            s1 = s1.replace('{result}', "success")
+            s1 = s1.replace('{warn_msg}', "無飛彈飛越警告")
+        elif (dt1 == dt2):
+            s1 = s1.replace('{result}', "danger")
+            s1 = s1.replace('{warn_msg}', "今日可能會發射飛彈")
+        else:
+            s1 = s1.replace('{result}', "warn")
+            s1 = s1.replace('{warn_msg}', "{} 可能會發射飛彈".format(dt2.strftime("%Y-%m-%d")))
     d1 = datetime.today().strftime('%Y%m%d%H%M%S')
     s1 = s1.replace('{version}',d1)
-    
-   
 
+    con.close()
 
     fid3.close()
     fid4 =  open("ObservationRoom/index.html", "w",encoding="utf-8")
