@@ -225,7 +225,7 @@ var options = {
     width: [0, 0, 0, 4, 0]
   },
   title: {
-    text: '每月統計',
+    text: '每月累計統計',
     style: {
       fontSize: "16px",
       color: "whitesmoke",
