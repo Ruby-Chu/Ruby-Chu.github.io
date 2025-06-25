@@ -1,7 +1,11 @@
 # Ruby-Chu.github.io
 
-
+### 刪除VIEW
+```sql
 DROP VIEW INFO_COUNT;
+```
+
+### 建立View
 ```sql
 CREATE VIEW INFO_COUNT AS
 SELECT strftime('%Y-%m', date) AS "year_month",
