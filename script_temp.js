@@ -17,7 +17,7 @@ window.Apex = {
       show: false,
     },
   },
-  colors: ["#a1c4fd", "#c471f5", "#ff9a9e", "#4facfe", "#667eea"],
+  colors: ["#f6d365", "#fbc2eb", "#a1c4fd", "#43e97b", "#48c6ef"],
   stroke: {
     width: 3,
   },
@@ -40,16 +40,17 @@ window.Apex = {
     gradient: {
       shade: "light",
       shadeIntensity: 0.5,
-      gradientToColors: ["#c2e9fb", "#fa71cd", "#fad0c4", "#00f2fe", "#764ba2"],
+      gradientToColors: ["#fda085", "#a6c1ee", "#c2e9fb", "#38f9d7", "#6f86d6"],
       inverseColors: true,
       opacityFrom: 1,
       opacityTo: 1,
-      stops: [0, 50, 100],
+      // stops: [0, 50, 100],
+      stops: [0, 25, 50, 75, 100],
       colorStops: [],
     },
   },
   tooltip: {
-    theme: "light",
+    theme: "dark",
   },
   yaxis: {
     opposite: true,
@@ -108,7 +109,7 @@ var optionsColumn = {
   },
   fill: {
     gradient: {
-      type: "diagonal2", // vertical, horizontal, diagonal1, diagonal2
+      type: "vertical", // vertical, horizontal, diagonal1, diagonal2
     },
   },
   xaxis: {
@@ -118,7 +119,7 @@ var optionsColumn = {
         // fontFamily: 'cursivesystem-ui',
       },
     },
-    categories: ['2025-06-24', '2025-06-23', '2025-06-22', '2025-06-21', '2025-06-20', '2025-06-19', '2025-06-18', '2025-06-17', '2025-06-16', '2025-06-15', '2025-06-14', '2025-06-13', '2025-06-12', '2025-06-11', '2025-06-10', '2025-06-09', '2025-06-08', '2025-06-07', '2025-06-06', '2025-06-05'],
+    categories: {date_temp},
   },
   plotOptions: {
     bar: {
@@ -183,7 +184,7 @@ var optionsCircle = {
   },
   fill: {
     gradient: {
-      type: "horizontal",
+      type: "vertical",
     }
   }
 };
@@ -209,7 +210,7 @@ var options = {
     type: 'column',
     data: {m_warship_temp}
   }, {
-    name: 'Total',
+    name: '共機+共艦',
     type: 'line',
     data: {m_total_temp}
   }, {
@@ -237,7 +238,8 @@ var options = {
   },
   labels: {m_labels_temp},
   yaxis: [{
-    seriesName: "共機架次",
+    min: 0,
+    max: 800,
     title: {
       text: '總數量(架/艘)',
       style: {
@@ -247,15 +249,18 @@ var options = {
     },
   },
   {
-    seriesName: "共機架次",
+    min: 0,
+    max: 800,
     show: false
   },
   {
-    seriesName: "共機架次",
+    min: 0,
+    max: 800,
     show: false
   },
   {
-    seriesName: "共機架次",
+    min: 0,
+    max: 800,
     show: false
   },
   {
@@ -271,9 +276,9 @@ var options = {
       },
     },
   }],
-  legend: {
-    show: false
-  },
+  // legend: {
+  //   show: false
+  // },
   fill: {
     gradient: {
       type: "vertical",
@@ -302,26 +307,3 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#chart2"), options);
 chart.render();
-
-
-$(".counter").each(function () {
-  var $this = $(this),
-    countTo = $this.attr("data-count");
-
-  $({ countNum: $this.text() }).animate(
-    {
-      countNum: countTo,
-    },
-
-    {
-      duration: 1000,
-      easing: "linear",
-      step: function () {
-        $this.text(Math.floor(this.countNum));
-      },
-      complete: function () {
-        $this.text(this.countNum);
-      },
-    }
-  );
-});
