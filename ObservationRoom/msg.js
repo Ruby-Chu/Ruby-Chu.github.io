@@ -233,8 +233,8 @@ var options = {
     },
   },
   dataLabels: {
-    // enabled: true,
-    // enabledOnSeries: [1, 3, 4]
+    enabled: true,
+    enabledOnSeries: [1, 3, 4]
   },
   labels: ['2025-06', '2025-05', '2025-04', '2025-03', '2025-02', '2025-01'],
   yaxis: [{
