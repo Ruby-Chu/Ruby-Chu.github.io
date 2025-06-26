@@ -111,7 +111,7 @@ if __name__ == "__main__":
         else:
             s1 = s1.replace('{result}', "warn")
             s1 = s1.replace('{warn_msg}', "{} 可能會發射飛彈".format(dt2.strftime("%Y-%m-%d")))
-    d1 = datetime.today().strftime('%Y%m%d%H%M%S')
+    d1 = datetime.today().strftime('%Y%m%d')
     s1 = s1.replace('{version}',d1)
 
     con.close()
