@@ -17,7 +17,7 @@ window.Apex = {
       show: false,
     },
   },
-  colors: ["#f6d365", "#fbc2eb", "#a1c4fd", "#43e97b", "#48c6ef"],
+  colors: ["#f6d365", "#48c6ef", "#fdfbfb", "#a1c4fd","#fbc2eb", "#43e97b"],
   stroke: {
     width: 3,
   },
@@ -40,7 +40,7 @@ window.Apex = {
     gradient: {
       shade: "light",
       shadeIntensity: 0.5,
-      gradientToColors: ["#fda085", "#a6c1ee", "#c2e9fb", "#38f9d7", "#6f86d6"],
+      gradientToColors: ["#fda085", "#6f86d6", "#ebedee", "#c2e9fb", "#a6c1ee", "#38f9d7"],
       inverseColors: true,
       opacityFrom: 1,
       opacityTo: 1,
