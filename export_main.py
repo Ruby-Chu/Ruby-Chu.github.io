@@ -5,7 +5,7 @@ if __name__ == "__main__":
     con = sqlite3.connect("mydb.db")
     cur = con.cursor()
 
-    rows = cur.execute("SELECT * FROM INFO ORDER BY date desc limit 20")
+    rows = cur.execute("SELECT * FROM INFO ORDER BY date desc limit 30")
     labels = []
     military = []
     warship = []
