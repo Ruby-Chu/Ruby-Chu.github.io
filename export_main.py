@@ -47,7 +47,7 @@ if __name__ == "__main__":
     s = s.replace('{today_military_p}', str(today_military_p))
     s = s.replace('{today_military_wp}', str(today_military_wp))
     
-    rows2 = cur.execute("select * from INFO_COUNT limit 6")
+    rows2 = cur.execute("select * from INFO_COUNT limit 7")
     m_labels = []
     m_military = []
     m_warship = []
