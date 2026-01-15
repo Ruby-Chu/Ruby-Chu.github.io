@@ -99,7 +99,7 @@ if __name__ == "__main__":
     rows3 = cur.execute("SELECT date, preview_missile FROM INFO WHERE preview_missile <> \" \" ORDER BY date DESC limit 1")
     for r in rows3:
         dt1 = datetime.now().date()
-        date_string = str(2025) + "-" + r[1] # str(dt1.year) + "-" + r[1]
+        date_string = r[0][0:4] + "-" + r[1] # str(dt1.year) + "-" + r[1]
         format_string = "%Y-%m-%d"
         dt2 = datetime.strptime(date_string, format_string).date()
         if (dt1 > dt2):
