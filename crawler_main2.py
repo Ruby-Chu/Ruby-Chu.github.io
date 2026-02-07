@@ -158,5 +158,6 @@ if __name__ == "__main__":
             else:
                 print("pass: ", date_string)
                 print("=================================")
+                break
     driver.quit()
     conn.close()
