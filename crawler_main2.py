@@ -144,7 +144,7 @@ if __name__ == "__main__":
                                                                                 enter_warn_total,
                                                                                 date2_string,
                                                                                 text)
-            print("共機{}架次\n逾越{}\n公務船{}艘\n共艦{}艘\n氣球{}顆".format(total_aircraft, enter_warn_total, 
+            print("共機{}架次\n逾越{}架次\n公務船{}艘\n共艦{}艘\n氣球{}顆".format(total_aircraft, enter_warn_total, 
                                                             total_official_ship, total_warship, total_balloon))
             print("{}飛彈經過台灣".format(missile_total))
             cursor.execute(statement)
