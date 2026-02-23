@@ -118,7 +118,7 @@ if __name__ == "__main__":
             context_text = content2.text.replace('區域動態\n', '')
             print(context_text)
             print(
-                "=== {}/{}/{} ===\n共機{}架次\n逾越:{}\n公務船{}艘\n共艦{}艘\n氣球{}顆\n".format(
+                "=== {}/{}/{} ===\n共機{}架次\n逾越:{}架次\n公務船{}艘\n共艦{}艘\n氣球{}顆\n".format(
                     year,
                     month,
                     day,
