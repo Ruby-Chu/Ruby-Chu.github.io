@@ -94,6 +94,7 @@ var optionsColumn = {
       color: "whitesmoke",
     },
   },
+  x: { show: true },
   subtitle: {
     text: "數量",
     floating: false,
