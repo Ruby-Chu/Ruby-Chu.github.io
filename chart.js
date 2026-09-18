@@ -1,20 +1,72 @@
 async function loadChart() {
   const response = await fetch("mnd_data.json");
-
   if (!response.ok) {
     throw new Error(`JSON 讀取失敗：${response.status}`);
   }
 
   const infos = await response.json();
 
-  // 將 Python 匯出的 JSON 轉成 ApexCharts Heatmap 格式
+  const latest = infos[0] ?? {};
+  const fighter = Number(latest.fighter ?? 0);
+  const enterFighter = Number(latest.enter_fighter ?? 0);
+
+  const enterRate = fighter > 0 ? Math.round((enterFighter / fighter) * 100) : 0;
+
   const toChartData = (fieldName) =>
     infos.map(item => ({
       x: item.dt,
       y: Number(item[fieldName] ?? 0)
     }));
 
-  const options = {
+  // chart 1
+  var options1 = {
+    series: [enterRate],
+    chart: {
+      height: 350,
+      type: 'gauge',
+    },
+    title: {
+      text: latest.dt ?? "無最新資料",
+    },
+    plotOptions: {
+      radialBar: {
+        startAngle: -135,
+        endAngle: 135,
+        bands: [
+          { from: 0, to: 100, color: '#FF4560' },
+        ],
+        bandsStyle: {
+          strokeWidth: '60%',
+          gap: 2,
+        },
+        hollow: {
+          margin: 0,
+          size: '60%',
+        },
+        dataLabels: {
+          name: { show: false },
+          value: {
+            offsetY: 8,
+            fontSize: '24px',
+            fontWeight: 700,
+            formatter: function (val) {
+              return val + '%'
+            },
+          },
+        },
+      },
+    },
+    fill: { opacity: 0.8 },
+    labels: ['逾越比率'],
+  } // options1
+  const chart1 = new ApexCharts(
+  document.querySelector("#chart1"),
+  options1
+  );
+  chart1.render();
+
+  // chart 2
+  const options2 = {
     series: [
       {
         name: "共機",
@@ -41,7 +93,6 @@ async function loadChart() {
         data: toChartData("missile")
       }
     ],
-
     chart: {
       height: 350,
       type: "heatmap"
@@ -56,81 +107,19 @@ async function loadChart() {
     title: {
       text: "近 7 日資料"
     }
-  };
+  }; // option2
 
-  const chart = new ApexCharts(
-    document.querySelector("#chart"),
-    options
+  const chart2 = new ApexCharts(
+    document.querySelector("#chart2"),
+    options2
   );
-
-  chart.render();
+  chart2.render();
 }
 
 loadChart().catch(error => {
   console.error("圖表建立失敗：", error);
 });
 
-
-// 
-var options2 = {
-  series: [85],
-  chart: {
-    height: 350,
-    type: 'gauge',
-  },
-  title: {
-    text: '2026/09/18',
-  },
-  plotOptions: {
-    radialBar: {
-      startAngle: -135,
-      endAngle: 135,
-      bands: [
-        { from: 0, to: 100, color: '#FF4560' },
-      ],
-      bandsStyle: {
-        strokeWidth: '60%',
-        gap: 2,
-      },
-      hollow: {
-        margin: 0,
-        size: '60%',
-      },
-      dataLabels: {
-        name: { show: false },
-        value: {
-          offsetY: 8,
-          fontSize: '24px',
-          fontWeight: 700,
-          formatter: function (val) {
-            return '逾越比:' + val + '%'
-          },
-        },
-      },
-    },
-  },
-  fill: { opacity: 0.8 },
-  labels: ['System Health'],
-}
-
-var chart2 = new ApexCharts(document.querySelector('#chart2'), options2)
-chart2.render()
-
-//
-
-// A contribution-style calendar heatmap built on the standard heatmap: 7 rows
-// (one weekday each) x ~53 columns (one week each). The trick that makes the
-// columns line up is that every cell in a week shares the SAME x = the date of
-// that week's Sunday. Because the x axis is datetime, the cells sit on a real
-// time scale and the axis labels the months for us (continuous-x heatmap).
-//
-// The year runs from ~52 weeks ago through today, and a cell is emitted only
-// for real in-range days: the first and last weeks are partial, so their
-// off-range corners are simply left blank (the "hanging" edges of a year view)
-// rather than padded. In-range days with zero activity still get a cell (the
-// lightest color); only days outside the range are absent. All dates are in
-// UTC so a day is always exactly 86400000 ms (no daylight-saving drift that
-// would shift a cell into the wrong weekday).
 var DAY = 86400000
 
 var calNow = new Date()
