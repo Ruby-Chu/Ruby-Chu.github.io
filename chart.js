@@ -197,7 +197,7 @@ async function loadChart2() {
       animations: { enabled: false },
     },
     title: {
-      text: 'Contribution activity',
+      text: '近一年內的資訊',
       align: 'center',
       style: { fontSize: '14px', fontWeight: 600 },
     },
