@@ -116,170 +116,213 @@ async function loadChart() {
   chart2.render();
 }
 
+async function loadChart2() {
+  // chart 3
+  const DAY = 86400000;
+  const calEnd = Date.UTC(
+    new Date().getUTCFullYear(),
+    new Date().getUTCMonth(),
+    new Date().getUTCDate()
+  );
+
+  const calStart = calEnd - 364 * DAY;
+  function parseUtcDate(dateText) {
+    return new Date(`${dateText}T00:00:00Z`).getTime();
+  }
+
+  function weekStartOf(ms) {
+    return ms - new Date(ms).getUTCDay() * DAY;
+  }
+
+  function buildCalendar(infos) {
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    const byDay = weekdays.map(name => ({
+      name,
+      data: []
+    }));
+
+    // 建立「日期 -> 當日資料」索引
+    const dataByDate = new Map(
+      infos.map(item => [item.dt, item])
+    );
+    for (let t = calStart; t <= calEnd; t += DAY) {
+      const dateText = new Date(t).toISOString().slice(0, 10);
+      const item = dataByDate.get(dateText) ?? {};
+
+      const fighter = Number(item.fighter ?? 0);
+      const enterFighter = Number(item.enter_fighter ?? 0);
+      const warship = Number(item.warship ?? 0);
+      const missile = Number(item.missile ?? 0);
+      const balloon = Number(item.balloon ?? 0);
+
+      // Heatmap 色階依此總數顯示
+      const total = fighter + warship + missile + balloon;
+
+      // 共機為 0 時，避免除以 0
+      const enterRate = fighter > 0
+        ? (enterFighter / fighter) * 100
+        : 0;
+
+      const dow = new Date(t).getUTCDay();
+
+      byDay[dow].data.push({
+        x: weekStartOf(t),
+        y: total,
+        date: t,
+
+        // 保留 Tooltip 要顯示的細項
+        fighter,
+        enterFighter,
+        enterRate,
+        warship,
+        missile,
+        balloon
+      });
+    }
+    return byDay.reverse();
+  }
+  const response = await fetch("mnd_365_data.json");
+  const infos = await response.json();
+  const calendarData = buildCalendar(infos);
+  var calMinX = weekStartOf(calStart) - 3.5 * DAY
+  var calMaxX = weekStartOf(calEnd) + 3.5 * DAY
+  var options3 = {
+    series: calendarData,
+    chart: {
+      height: 250,
+      width: '100%',
+      type: 'heatmap',
+      toolbar: { show: false },
+      animations: { enabled: false },
+    },
+    title: {
+      text: 'Contribution activity',
+      align: 'center',
+      style: { fontSize: '14px', fontWeight: 600 },
+    },
+    dataLabels: { enabled: false },
+    // A small light gap between cells, like a contributions calendar.
+    stroke: { width: 3, colors: ['#fff'] },
+    legend: { show: false },
+    states: {
+      active: {
+        filter: {
+          type: 'none',
+        },
+      },
+    },
+    plotOptions: {
+      heatmap: {
+        radius: 2,
+        // Flat bucket colors (no within-range shading), so each level is one color.
+        enableShades: false,
+        colorScale: {
+          ranges: [
+            { from: 0, to: 0, name: '0', color: '#ebedf0' },
+            { from: 1, to: 3, name: '1-3', color: '#9be9a8' },
+            { from: 4, to: 7, name: '4-7', color: '#40c463' },
+            { from: 8, to: 11, name: '8-11', color: '#30a14e' },
+            { from: 12, to: 100, name: '12+', color: '#216e39' },
+          ],
+        },
+      },
+    },
+    xaxis: {
+      type: 'datetime',
+      min: calMinX,
+      max: calMaxX,
+      position: 'top',
+      labels: {
+        format: 'MMM',
+        datetimeUTC: false,
+        style: { colors: '#767676', fontSize: '12px' },
+      },
+      axisBorder: { show: false },
+      axisTicks: { show: false },
+      tooltip: { enabled: false },
+      crosshairs: {
+        show: false,
+      },
+    },
+    yaxis: {
+      // Show only alternate weekday labels (Mon / Wed / Fri), like the original.
+      labels: {
+        formatter: function (val) {
+          return ['Mon', 'Wed', 'Fri'].indexOf(val) >= 0 ? val : ''
+        },
+        style: { colors: ['#767676'], fontSize: '12px' },
+      },
+    },
+    grid: {
+      yaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
+    tooltip: {
+    custom: function (opts) {
+      const pt = opts.w.config.series[opts.seriesIndex]
+        .data[opts.dataPointIndex];
+
+      const when = new Date(pt.date).toLocaleDateString("zh-TW", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        weekday: "long",
+        timeZone: "UTC"
+      });
+
+      return `
+        <div style="
+          padding:8px 12px;
+          font-size:8px;
+          line-height:1.7;
+          background: rgba(255, 255, 255, 0.75);
+          color: #222;
+          border-radius: 6px;
+        ">
+          <b>${when}</b><br>
+          共機：${pt.fighter} 架
+          （逾越：${pt.enterFighter} 架，${pt.enterRate.toFixed(1)}%）<br>
+          共艦：${pt.warship} 艘<br>
+          飛彈：${pt.missile} 枚<br>
+          氣球：${pt.balloon} 顆<br>
+          <hr style="margin:4px 0; border:0; border-top:1px solid #ddd">
+          合計：${pt.y}
+        </div>
+      `;
+    }
+  },
+  }
+
+  // var chart3 = new ApexCharts(document.querySelector('#chart3'), options3)
+  // chart3.render()
+  const chart3 = new ApexCharts(
+    document.querySelector("#chart3"),
+    options3
+  );
+  chart3.render();
+}
+
 loadChart().catch(error => {
   console.error("圖表建立失敗：", error);
 });
 
-var DAY = 86400000
+loadChart2().catch(error => {
+  console.error("圖表建立失敗：", error);
+});
 
-var calNow = new Date()
-var calEnd = Date.UTC(
-  calNow.getUTCFullYear(),
-  calNow.getUTCMonth(),
-  calNow.getUTCDate(),
-)
-var calStart = calEnd - 364 * DAY
 
-// The Sunday that starts the week containing a given day = that week's column x.
-function weekStartOf(ms) {
-  return ms - new Date(ms).getUTCDay() * DAY
-}
 
-function buildCalendar() {
-  var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  var byDay = weekdays.map(function (n) {
-    return { name: n, data: [] }
-  })
 
-  // Deterministic PRNG so the demo looks the same on every reload.
-  var seed = 20240407
-  function rand() {
-    seed = (seed * 1103515245 + 12345) & 0x7fffffff
-    return seed / 0x7fffffff
-  }
 
-  var totalWeeks = Math.round(
-    (weekStartOf(calEnd) - weekStartOf(calStart)) / (7 * DAY),
-  )
-  for (var t = calStart; t <= calEnd; t += DAY) {
-    var dow = new Date(t).getUTCDay()
-    var wk = Math.round((weekStartOf(t) - weekStartOf(calStart)) / (7 * DAY))
-    // A gentle seasonal wave so some months look busier than others.
-    var season = 0.5 + 0.5 * Math.sin((wk / totalWeeks) * Math.PI * 2 - 1)
-    var count = 0
-    // ~55% of days have activity; weekends are lighter.
-    if (rand() < 0.35 + 0.4 * season) {
-      var bias = dow === 0 || dow === 6 ? 0.5 : 1
-      // rand()*rand() skews toward the low buckets, like real activity.
-      count = Math.round(rand() * rand() * 16 * bias) + 1
-    }
-    // x is the week's Sunday (so the column lines up); the cell's true date is
-    // stashed on the datum for the tooltip (x can't carry it: all 7 weekdays in
-    // a column share the same x).
-    byDay[dow].data.push({ x: weekStartOf(t), y: count, date: t })
-  }
 
-  // Rows read Sun (top) -> Sat (bottom). ApexCharts draws the last series on
-  // top, so reverse the weekday order before returning.
-  return byDay.reverse()
-}
 
-var calendarData = buildCalendar()
-console.log(calendarData)
-// Pad half a week on each side so the first and last columns are full width.
-var calMinX = weekStartOf(calStart) - 3.5 * DAY
-var calMaxX = weekStartOf(calEnd) + 3.5 * DAY
 
-var options3 = {
-  series: calendarData,
-  chart: {
-    height: 250,
-    width: '100%',
-    type: 'heatmap',
-    toolbar: { show: false },
-    animations: { enabled: true },
-  },
-  title: {
-    text: '近一年內資訊',
-    align: 'center',
-    style: { fontSize: '16px', fontWeight: 800 },
-  },
-  dataLabels: { enabled: false },
-  // A small light gap between cells, like a contributions calendar.
-  stroke: { width: 3, colors: ['#fff'] },
-  legend: { show: false },
-  states: {
-    active: {
-      filter: {
-        type: 'none',
-      },
-    },
-  },
-  plotOptions: {
-    heatmap: {
-      radius: 2,
-      // Flat bucket colors (no within-range shading), so each level is one color.
-      enableShades: false,
-      colorScale: {
-        ranges: [
-          { from: 0, to: 0, name: '0', color: '#ebedf0' },
-          { from: 1, to: 3, name: '1-3', color: '#9be9a8' },
-          { from: 4, to: 7, name: '4-7', color: '#40c463' },
-          { from: 8, to: 11, name: '8-11', color: '#30a14e' },
-          { from: 12, to: 100, name: '12+', color: '#216e39' },
-        ],
-      },
-    },
-  },
-  xaxis: {
-    type: 'datetime',
-    min: calMinX,
-    max: calMaxX,
-    position: 'top',
-    labels: {
-      format: 'MMM',
-      datetimeUTC: false,
-      style: { colors: '#767676', fontSize: '12px' },
-    },
-    axisBorder: { show: false },
-    axisTicks: { show: false },
-    tooltip: { enabled: false },
-    crosshairs: {
-      show: false,
-    },
-  },
-  yaxis: {
-    // Show only alternate weekday labels (Mon / Wed / Fri), like the original.
-    labels: {
-      formatter: function (val) {
-        return ['Mon', 'Wed', 'Fri'].indexOf(val) >= 0 ? val : ''
-      },
-      style: { colors: ['#767676'], fontSize: '12px' },
-    },
-  },
-  grid: {
-    yaxis: {
-      lines: {
-        show: false,
-      },
-    },
-  },
-  tooltip: {
-    // Custom tooltip so it can show the cell's real date (stashed on the datum)
-    // plus the count, e.g. "5 contributions on Monday, January 8, 2024".
-    custom: function (opts) {
-      var pt = opts.w.config.series[opts.seriesIndex].data[opts.dataPointIndex]
-      var n = pt.y
-      var when = new Date(pt.date).toLocaleDateString('en-US', {
-        dateStyle: 'medium',
-        timeZone: 'UTC',
-      })
-      var count =
-        n === 0
-          ? 'No contributions'
-          : n + (n === 1 ? ' contribution' : ' contributions')
-      return (
-        '<div style="padding:6px 10px;font-size:13px">' +
-        '<b>' +
-        count +
-        '</b> on ' +
-        when +
-        '</div>'
-      )
-    },
-  },
-}
 
-var chart3 = new ApexCharts(document.querySelector('#chart3'), options3)
-chart3.render()
+
+
+
 
