@@ -220,10 +220,10 @@ async function loadChart2() {
         colorScale: {
           ranges: [
             { from: 0, to: 0, name: '0', color: '#ebedf0' },
-            { from: 1, to: 3, name: '1-3', color: '#9be9a8' },
-            { from: 4, to: 7, name: '4-7', color: '#40c463' },
-            { from: 8, to: 11, name: '8-11', color: '#30a14e' },
-            { from: 12, to: 100, name: '12+', color: '#216e39' },
+            { from: 1, to: 20, name: '1-20', color: '#9be9a8' },
+            { from: 21, to: 50, name: '21-50', color: '#001eff82' },
+            { from: 51, to: 100, name: '51-100', color: '#ff01aa74' },
+            { from: 101, to: 300, name: '100+', color: '#ff0000c3' },
           ],
         },
       },
@@ -278,8 +278,8 @@ async function loadChart2() {
         <div style="
           padding:8px 12px;
           font-size:8px;
-          line-height:1.7;
-          background: rgba(255, 255, 255, 0.75);
+          line-height:1;
+          background: rgba(255, 255, 255, 0.65);
           color: #222;
           border-radius: 6px;
         ">
