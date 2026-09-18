@@ -1,0 +1,72 @@
+[
+  {
+    "dt": "2026-09-18",
+    "fighter": 28,
+    "enter_fighter": 24,
+    "warship": 7,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-09-17",
+    "fighter": 19,
+    "enter_fighter": 17,
+    "warship": 8,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-09-16",
+    "fighter": 15,
+    "enter_fighter": 12,
+    "warship": 8,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-09-15",
+    "fighter": 8,
+    "enter_fighter": 7,
+    "warship": 7,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-09-14",
+    "fighter": 4,
+    "enter_fighter": 2,
+    "warship": 6,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-09-13",
+    "fighter": 5,
+    "enter_fighter": 3,
+    "warship": 5,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-09-12",
+    "fighter": 7,
+    "enter_fighter": 5,
+    "warship": 6,
+    "officialship": 2,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  }
+]

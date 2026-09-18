@@ -1,81 +1,74 @@
-var options = {
-  series: [
-    {
-      name: '共機',
-      data: [{x: '2026-09-18', y: 28},
-        {x: '2026-09-17', y: 19},
-        {x: '2026-09-16', y: 15},
-        {x: '2026-09-15', y: 8},
-        {x: '2026-09-14', y: 4},
-        {x: '2026-09-13', y: 5},
-        {x: '2026-09-12', y: 7}],
+async function loadChart() {
+  const response = await fetch("mnd_data.json");
+
+  if (!response.ok) {
+    throw new Error(`JSON 讀取失敗：${response.status}`);
+  }
+
+  const infos = await response.json();
+
+  // 將 Python 匯出的 JSON 轉成 ApexCharts Heatmap 格式
+  const toChartData = (fieldName) =>
+    infos.map(item => ({
+      x: item.dt,
+      y: Number(item[fieldName] ?? 0)
+    }));
+
+  const options = {
+    series: [
+      {
+        name: "共機",
+        data: toChartData("fighter")
+      },
+      {
+        name: "共機逾越",
+        data: toChartData("enter_fighter")
+      },
+      {
+        name: "共艦",
+        data: toChartData("warship")
+      },
+      {
+        name: "公務船",
+        data: toChartData("officialship")
+      },
+      {
+        name: "氣球",
+        data: toChartData("balloon")
+      },
+      {
+        name: "飛彈",
+        data: toChartData("missile")
+      }
+    ],
+
+    chart: {
+      height: 350,
+      type: "heatmap"
     },
-    {
-      name: '共機逾越',
-      data: [{x: '2026-09-18', y: 24},
-        {x: '2026-09-17', y: 17},
-        {x: '2026-09-16', y: 12},
-        {x: '2026-09-15', y: 7},
-        {x: '2026-09-14', y: 2},
-        {x: '2026-09-13', y: 3},
-        {x: '2026-09-12', y: 5}],
+
+    dataLabels: {
+      enabled: true
     },
-    {
-      name: '共艦',
-      data: [{x: '2026-09-18', y: 7},
-        {x: '2026-09-17', y: 8},
-        {x: '2026-09-16', y: 8},
-        {x: '2026-09-15', y: 7},
-        {x: '2026-09-14', y: 6},
-        {x: '2026-09-13', y: 5},
-        {x: '2026-09-12', y: 6}],
-    },
-    {
-      name: '公務船',
-      data: [{x: '2026-09-18', y: 2},
-        {x: '2026-09-17', y: 2},
-        {x: '2026-09-16', y: 2},
-        {x: '2026-09-15', y: 2},
-        {x: '2026-09-14', y: 2},
-        {x: '2026-09-13', y: 2},
-        {x: '2026-09-12', y: 2}],
-    },
-    {
-      name: '氣球',
-      data: [{x: '2026-09-18', y: 0},
-        {x: '2026-09-17', y: 0},
-        {x: '2026-09-16', y: 0},
-        {x: '2026-09-15', y: 0},
-        {x: '2026-09-14', y: 0},
-        {x: '2026-09-13', y: 0},
-        {x: '2026-09-12', y: 0}],
-    },
-    {
-      name: '飛彈',
-      data: [{x: '2026-09-18', y: 0},
-        {x: '2026-09-17', y: 0},
-        {x: '2026-09-16', y: 0},
-        {x: '2026-09-15', y: 0},
-        {x: '2026-09-14', y: 0},
-        {x: '2026-09-13', y: 0},
-        {x: '2026-09-12', y: 0}],
-    },
-  ],
-  chart: {
-    height: 350,
-    type: 'heatmap',
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  colors: ['#6e2154'],
-  title: {
-    text: '近7日資料',
-  },
+
+    colors: ["#6e2154"],
+
+    title: {
+      text: "近 7 日資料"
+    }
+  };
+
+  const chart = new ApexCharts(
+    document.querySelector("#chart"),
+    options
+  );
+
+  chart.render();
 }
 
-var chart = new ApexCharts(document.querySelector('#chart'), options)
-chart.render()
+loadChart().catch(error => {
+  console.error("圖表建立失敗：", error);
+});
 
 
 // 
