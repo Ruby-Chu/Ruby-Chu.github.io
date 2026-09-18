@@ -51,7 +51,7 @@ async function loadChart() {
       enabled: true
     },
 
-    colors: ["#6e2154"],
+    colors: ["#2470c1"],
 
     title: {
       text: "近 7 日資料"
