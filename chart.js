@@ -1,0 +1,303 @@
+var options = {
+  series: [
+    {
+      name: '共機',
+      data: [{x: '2026-09-18', y: 28},
+        {x: '2026-09-17', y: 19},
+        {x: '2026-09-16', y: 15},
+        {x: '2026-09-15', y: 8},
+        {x: '2026-09-14', y: 4},
+        {x: '2026-09-13', y: 5},
+        {x: '2026-09-12', y: 7}],
+    },
+    {
+      name: '共機逾越',
+      data: [{x: '2026-09-18', y: 24},
+        {x: '2026-09-17', y: 17},
+        {x: '2026-09-16', y: 12},
+        {x: '2026-09-15', y: 7},
+        {x: '2026-09-14', y: 2},
+        {x: '2026-09-13', y: 3},
+        {x: '2026-09-12', y: 5}],
+    },
+    {
+      name: '共艦',
+      data: [{x: '2026-09-18', y: 7},
+        {x: '2026-09-17', y: 8},
+        {x: '2026-09-16', y: 8},
+        {x: '2026-09-15', y: 7},
+        {x: '2026-09-14', y: 6},
+        {x: '2026-09-13', y: 5},
+        {x: '2026-09-12', y: 6}],
+    },
+    {
+      name: '公務船',
+      data: [{x: '2026-09-18', y: 2},
+        {x: '2026-09-17', y: 2},
+        {x: '2026-09-16', y: 2},
+        {x: '2026-09-15', y: 2},
+        {x: '2026-09-14', y: 2},
+        {x: '2026-09-13', y: 2},
+        {x: '2026-09-12', y: 2}],
+    },
+    {
+      name: '氣球',
+      data: [{x: '2026-09-18', y: 0},
+        {x: '2026-09-17', y: 0},
+        {x: '2026-09-16', y: 0},
+        {x: '2026-09-15', y: 0},
+        {x: '2026-09-14', y: 0},
+        {x: '2026-09-13', y: 0},
+        {x: '2026-09-12', y: 0}],
+    },
+    {
+      name: '飛彈',
+      data: [{x: '2026-09-18', y: 0},
+        {x: '2026-09-17', y: 0},
+        {x: '2026-09-16', y: 0},
+        {x: '2026-09-15', y: 0},
+        {x: '2026-09-14', y: 0},
+        {x: '2026-09-13', y: 0},
+        {x: '2026-09-12', y: 0}],
+    },
+  ],
+  chart: {
+    height: 350,
+    type: 'heatmap',
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  colors: ['#6e2154'],
+  title: {
+    text: '近7日資料',
+  },
+}
+
+var chart = new ApexCharts(document.querySelector('#chart'), options)
+chart.render()
+
+
+// 
+var options2 = {
+  series: [85],
+  chart: {
+    height: 350,
+    type: 'gauge',
+  },
+  title: {
+    text: '2026/09/18',
+  },
+  plotOptions: {
+    radialBar: {
+      startAngle: -135,
+      endAngle: 135,
+      bands: [
+        { from: 0, to: 100, color: '#FF4560' },
+      ],
+      bandsStyle: {
+        strokeWidth: '60%',
+        gap: 2,
+      },
+      hollow: {
+        margin: 0,
+        size: '60%',
+      },
+      dataLabels: {
+        name: { show: false },
+        value: {
+          offsetY: 8,
+          fontSize: '24px',
+          fontWeight: 700,
+          formatter: function (val) {
+            return '逾越比:' + val + '%'
+          },
+        },
+      },
+    },
+  },
+  fill: { opacity: 0.8 },
+  labels: ['System Health'],
+}
+
+var chart2 = new ApexCharts(document.querySelector('#chart2'), options2)
+chart2.render()
+
+//
+
+// A contribution-style calendar heatmap built on the standard heatmap: 7 rows
+// (one weekday each) x ~53 columns (one week each). The trick that makes the
+// columns line up is that every cell in a week shares the SAME x = the date of
+// that week's Sunday. Because the x axis is datetime, the cells sit on a real
+// time scale and the axis labels the months for us (continuous-x heatmap).
+//
+// The year runs from ~52 weeks ago through today, and a cell is emitted only
+// for real in-range days: the first and last weeks are partial, so their
+// off-range corners are simply left blank (the "hanging" edges of a year view)
+// rather than padded. In-range days with zero activity still get a cell (the
+// lightest color); only days outside the range are absent. All dates are in
+// UTC so a day is always exactly 86400000 ms (no daylight-saving drift that
+// would shift a cell into the wrong weekday).
+var DAY = 86400000
+
+var calNow = new Date()
+var calEnd = Date.UTC(
+  calNow.getUTCFullYear(),
+  calNow.getUTCMonth(),
+  calNow.getUTCDate(),
+)
+var calStart = calEnd - 364 * DAY
+
+// The Sunday that starts the week containing a given day = that week's column x.
+function weekStartOf(ms) {
+  return ms - new Date(ms).getUTCDay() * DAY
+}
+
+function buildCalendar() {
+  var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  var byDay = weekdays.map(function (n) {
+    return { name: n, data: [] }
+  })
+
+  // Deterministic PRNG so the demo looks the same on every reload.
+  var seed = 20240407
+  function rand() {
+    seed = (seed * 1103515245 + 12345) & 0x7fffffff
+    return seed / 0x7fffffff
+  }
+
+  var totalWeeks = Math.round(
+    (weekStartOf(calEnd) - weekStartOf(calStart)) / (7 * DAY),
+  )
+  for (var t = calStart; t <= calEnd; t += DAY) {
+    var dow = new Date(t).getUTCDay()
+    var wk = Math.round((weekStartOf(t) - weekStartOf(calStart)) / (7 * DAY))
+    // A gentle seasonal wave so some months look busier than others.
+    var season = 0.5 + 0.5 * Math.sin((wk / totalWeeks) * Math.PI * 2 - 1)
+    var count = 0
+    // ~55% of days have activity; weekends are lighter.
+    if (rand() < 0.35 + 0.4 * season) {
+      var bias = dow === 0 || dow === 6 ? 0.5 : 1
+      // rand()*rand() skews toward the low buckets, like real activity.
+      count = Math.round(rand() * rand() * 16 * bias) + 1
+    }
+    // x is the week's Sunday (so the column lines up); the cell's true date is
+    // stashed on the datum for the tooltip (x can't carry it: all 7 weekdays in
+    // a column share the same x).
+    byDay[dow].data.push({ x: weekStartOf(t), y: count, date: t })
+  }
+
+  // Rows read Sun (top) -> Sat (bottom). ApexCharts draws the last series on
+  // top, so reverse the weekday order before returning.
+  return byDay.reverse()
+}
+
+var calendarData = buildCalendar()
+console.log(calendarData)
+// Pad half a week on each side so the first and last columns are full width.
+var calMinX = weekStartOf(calStart) - 3.5 * DAY
+var calMaxX = weekStartOf(calEnd) + 3.5 * DAY
+
+var options3 = {
+  series: calendarData,
+  chart: {
+    height: 250,
+    width: '100%',
+    type: 'heatmap',
+    toolbar: { show: false },
+    animations: { enabled: true },
+  },
+  title: {
+    text: '近一年內資訊',
+    align: 'center',
+    style: { fontSize: '16px', fontWeight: 800 },
+  },
+  dataLabels: { enabled: false },
+  // A small light gap between cells, like a contributions calendar.
+  stroke: { width: 3, colors: ['#fff'] },
+  legend: { show: false },
+  states: {
+    active: {
+      filter: {
+        type: 'none',
+      },
+    },
+  },
+  plotOptions: {
+    heatmap: {
+      radius: 2,
+      // Flat bucket colors (no within-range shading), so each level is one color.
+      enableShades: false,
+      colorScale: {
+        ranges: [
+          { from: 0, to: 0, name: '0', color: '#ebedf0' },
+          { from: 1, to: 3, name: '1-3', color: '#9be9a8' },
+          { from: 4, to: 7, name: '4-7', color: '#40c463' },
+          { from: 8, to: 11, name: '8-11', color: '#30a14e' },
+          { from: 12, to: 100, name: '12+', color: '#216e39' },
+        ],
+      },
+    },
+  },
+  xaxis: {
+    type: 'datetime',
+    min: calMinX,
+    max: calMaxX,
+    position: 'top',
+    labels: {
+      format: 'MMM',
+      datetimeUTC: false,
+      style: { colors: '#767676', fontSize: '12px' },
+    },
+    axisBorder: { show: false },
+    axisTicks: { show: false },
+    tooltip: { enabled: false },
+    crosshairs: {
+      show: false,
+    },
+  },
+  yaxis: {
+    // Show only alternate weekday labels (Mon / Wed / Fri), like the original.
+    labels: {
+      formatter: function (val) {
+        return ['Mon', 'Wed', 'Fri'].indexOf(val) >= 0 ? val : ''
+      },
+      style: { colors: ['#767676'], fontSize: '12px' },
+    },
+  },
+  grid: {
+    yaxis: {
+      lines: {
+        show: false,
+      },
+    },
+  },
+  tooltip: {
+    // Custom tooltip so it can show the cell's real date (stashed on the datum)
+    // plus the count, e.g. "5 contributions on Monday, January 8, 2024".
+    custom: function (opts) {
+      var pt = opts.w.config.series[opts.seriesIndex].data[opts.dataPointIndex]
+      var n = pt.y
+      var when = new Date(pt.date).toLocaleDateString('en-US', {
+        dateStyle: 'medium',
+        timeZone: 'UTC',
+      })
+      var count =
+        n === 0
+          ? 'No contributions'
+          : n + (n === 1 ? ' contribution' : ' contributions')
+      return (
+        '<div style="padding:6px 10px;font-size:13px">' +
+        '<b>' +
+        count +
+        '</b> on ' +
+        when +
+        '</div>'
+      )
+    },
+  },
+}
+
+var chart3 = new ApexCharts(document.querySelector('#chart3'), options3)
+chart3.render()
+
