@@ -1,22 +1,79 @@
+function formatDate(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
 async function loadChart() {
   const response = await fetch("mnd_data.json");
   if (!response.ok) {
     throw new Error(`JSON 讀取失敗：${response.status}`);
   }
-
   const infos = await response.json();
+  // 建立：日期 -> 資料 的索引
+  const dataByDate = new Map(
+    infos.map(item => [item.dt, item])
+  );
 
-  const latest = infos[0] ?? {};
-  const fighter = Number(latest.fighter ?? 0);
-  const enterFighter = Number(latest.enter_fighter ?? 0);
+  // 今天；未來即使資料尚未寫入，也會有預設 0
+  const todayText = formatDate(new Date());
 
-  const enterRate = fighter > 0 ? Math.round((enterFighter / fighter) * 100) : 0;
+  const emptyData = {
+    dt: todayText,
+    fighter: 0,
+    enter_fighter: 0,
+    warship: 0,
+    officialship: 0,
+    balloon: 0,
+    missile: 0
+  };
 
-  const toChartData = (fieldName) =>
-    infos.map(item => ({
-      x: item.dt,
-      y: Number(item[fieldName] ?? 0)
-    }));
+// 本日資料：若資料庫沒有今天，所有數值為 0
+const latest = {
+  ...emptyData,
+  ...(dataByDate.get(todayText) ?? {})
+};
+
+// 產生今天往前 6 天，共 7 天；依日期由新到舊排序
+const last7Days = Array.from({ length: 7 }, (_, index) => {
+  const date = new Date();
+  date.setDate(date.getDate() - index);
+
+  const dt = formatDate(date);
+
+  return {
+    ...emptyData,
+    dt,
+    ...(dataByDate.get(dt) ?? {})
+  };
+});
+
+
+
+  // const latest = infos[0] ?? {};
+  // const fighter = Number(latest.fighter ?? 0);
+  // const enterFighter = Number(latest.enter_fighter ?? 0);
+
+  // const enterRate = fighter > 0 ? Math.round((enterFighter / fighter) * 100) : 0;
+const fighter = Number(latest.fighter ?? 0);
+const enterFighter = Number(latest.enter_fighter ?? 0);
+
+const enterRate = fighter > 0
+  ? Math.round((enterFighter / fighter) * 100)
+  : 0;
+
+const toChartData = (fieldName) =>
+  last7Days.map(item => ({
+    x: item.dt,
+    y: Number(item[fieldName] ?? 0)
+  }));
+
+  // const toChartData = (fieldName) =>
+  //   infos.map(item => ({
+  //     x: item.dt,
+  //     y: Number(item[fieldName] ?? 0)
+  //   }));
 
   // chart 1
   var options1 = {
@@ -182,7 +239,7 @@ async function loadChart2() {
     }
     return byDay.reverse();
   }
-  const response = await fetch("mnd_365_data.json");
+  const response = await fetch("mnd_data.json");
   const infos = await response.json();
   const calendarData = buildCalendar(infos);
   var calMinX = weekStartOf(calStart) - 3.5 * DAY
