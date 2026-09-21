@@ -1110,6 +1110,16 @@
     "missile_date": " "
   },
   {
+    "dt": "2026-06-02",
+    "fighter": 7,
+    "enter_fighter": 7,
+    "warship": 8,
+    "officialship": 5,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
     "dt": "2026-06-01",
     "fighter": 0,
     "enter_fighter": 0,
