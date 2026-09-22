@@ -9,6 +9,7 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.9.1/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
@@ -50,8 +51,8 @@
             <div class="sidebar-wrapper">
                 <nav class="mt-2">
                     <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu">
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fa-solid fa-spider"></i>
                                 <p>
                                     爬蟲
@@ -60,7 +61,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./mnd.html" class="nav-link active">
+                                    <a href="./mnd.html" class="nav-link">
                                         <i class="nav-icon fa-solid fa-jet-fighter"></i>
                                         <p>解放軍臺海周邊海</p>
                                     </a>
@@ -79,8 +80,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="nav-icon fa-solid fa-eye"></i>
                                 <p>
                                     影像辨識
@@ -101,7 +102,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./people_counting.html" class="nav-link">
+                                    <a href="./people_counting.html" class="nav-link active">
                                         <i class="nav-icon fa-solid fa-person-walking-dashed-line-arrow-right"></i>
                                         <p>People Counting</p>
                                     </a>
@@ -117,31 +118,30 @@
         <main class="app-main">
             <div class="app-content-header">
                 <div class="container-fluid">
-                    <h3 class="mb-0">爬蟲資訊</h3>
+                    <h3 class="mb-0">建置中</h3>
                 </div>
             </div>
             <div class="app-content">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">解放軍臺海周邊海</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div id="chart1"></div>
+                <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+                    <!-- From Uiverse.io by Nawsome -->
+                    <div aria-label="Orange and tan hamster running in a metal wheel" role="img"
+                        class="wheel-and-hamster">
+                        <div class="wheel"></div>
+                        <div class="hamster">
+                            <div class="hamster__body">
+                                <div class="hamster__head">
+                                    <div class="hamster__ear"></div>
+                                    <div class="hamster__eye"></div>
+                                    <div class="hamster__nose"></div>
                                 </div>
-                                <div class="col-8">
-                                    <div id="chart2"></div>
-                                </div>
+                                <div class="hamster__limb hamster__limb--fr"></div>
+                                <div class="hamster__limb hamster__limb--fl"></div>
+                                <div class="hamster__limb hamster__limb--br"></div>
+                                <div class="hamster__limb hamster__limb--bl"></div>
+                                <div class="hamster__tail"></div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div id="chart3"></div>
-                                </div>
-                            </div>
-                            <script src="./js/mnd.js" charset="UTF-8"></script>
                         </div>
+                        <div class="spoke"></div>
                     </div>
                 </div>
             </div>
