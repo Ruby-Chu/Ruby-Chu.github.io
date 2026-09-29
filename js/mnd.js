@@ -306,7 +306,7 @@ async function loadChart2() {
       // Show only alternate weekday labels (Mon / Wed / Fri), like the original.
       labels: {
         formatter: function (val) {
-          return ['Mon', 'Wed', 'Fri'].indexOf(val) >= 0 ? val : ''
+          return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(val) >= 0 ? val : ''
         },
         style: { colors: ['#767676'], fontSize: '12px' },
       },
