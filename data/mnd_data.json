@@ -1,5 +1,15 @@
 [
   {
+    "dt": "2026-10-15",
+    "fighter": 15,
+    "enter_fighter": 13,
+    "warship": 10,
+    "officialship": 7,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
     "dt": "2026-10-14",
     "fighter": 9,
     "enter_fighter": 9,
@@ -3634,16 +3644,6 @@
     "fighter": 23,
     "enter_fighter": 21,
     "warship": 8,
-    "officialship": 2,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-15",
-    "fighter": 16,
-    "enter_fighter": 14,
-    "warship": 13,
     "officialship": 2,
     "balloon": 0,
     "missile": 0,
