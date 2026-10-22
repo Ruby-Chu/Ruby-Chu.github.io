@@ -1,5 +1,85 @@
 [
   {
+    "dt": "2026-10-22",
+    "fighter": 0,
+    "enter_fighter": 0,
+    "warship": 6,
+    "officialship": 7,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-21",
+    "fighter": 29,
+    "enter_fighter": 23,
+    "warship": 6,
+    "officialship": 9,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-20",
+    "fighter": 14,
+    "enter_fighter": 8,
+    "warship": 7,
+    "officialship": 7,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-19",
+    "fighter": 5,
+    "enter_fighter": 3,
+    "warship": 6,
+    "officialship": 9,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-18",
+    "fighter": 2,
+    "enter_fighter": 2,
+    "warship": 5,
+    "officialship": 9,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-17",
+    "fighter": 9,
+    "enter_fighter": 5,
+    "warship": 6,
+    "officialship": 8,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-16",
+    "fighter": 8,
+    "enter_fighter": 8,
+    "warship": 9,
+    "officialship": 7,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
+    "dt": "2026-10-15",
+    "fighter": 15,
+    "enter_fighter": 13,
+    "warship": 10,
+    "officialship": 7,
+    "balloon": 0,
+    "missile": 0,
+    "missile_date": " "
+  },
+  {
     "dt": "2026-10-14",
     "fighter": 9,
     "enter_fighter": 9,
@@ -3565,86 +3645,6 @@
     "enter_fighter": 1,
     "warship": 4,
     "officialship": 0,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-22",
-    "fighter": 2,
-    "enter_fighter": 2,
-    "warship": 4,
-    "officialship": 1,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-21",
-    "fighter": 2,
-    "enter_fighter": 0,
-    "warship": 5,
-    "officialship": 0,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-20",
-    "fighter": 3,
-    "enter_fighter": 1,
-    "warship": 5,
-    "officialship": 0,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-19",
-    "fighter": 2,
-    "enter_fighter": 0,
-    "warship": 6,
-    "officialship": 0,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-18",
-    "fighter": 27,
-    "enter_fighter": 19,
-    "warship": 8,
-    "officialship": 0,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-17",
-    "fighter": 18,
-    "enter_fighter": 18,
-    "warship": 9,
-    "officialship": 0,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-16",
-    "fighter": 23,
-    "enter_fighter": 21,
-    "warship": 8,
-    "officialship": 2,
-    "balloon": 0,
-    "missile": 0,
-    "missile_date": " "
-  },
-  {
-    "dt": "2025-10-15",
-    "fighter": 16,
-    "enter_fighter": 14,
-    "warship": 13,
-    "officialship": 2,
     "balloon": 0,
     "missile": 0,
     "missile_date": " "
